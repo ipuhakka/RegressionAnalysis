@@ -130,7 +130,7 @@ namespace RegressionAnalysis
             ModelFit.AdjustedR2(y, expl);
             sw.Stop();
             Console.WriteLine("Took " + sw.ElapsedMilliseconds + " milliseconds");
-            Assert.LessOrEqual(sw.ElapsedMilliseconds, 2000);
+            Assert.LessOrEqual(sw.ElapsedMilliseconds, 1500);
         }
 
     }

@@ -30,11 +30,9 @@ namespace RegressionAnalysis
                 Console.WriteLine(e.StackTrace);
                 throw e;
             }
-
             double R2 = GoodnessOfFit.CoefficientOfDetermination(fitted, y);
 
             return 1 - (((1 - R2) * (n - 1)) / (n - k - 1));
-
         }
 
         /// <summary>
@@ -48,15 +46,13 @@ namespace RegressionAnalysis
         public static List<double> FittedValues(List<double> y, List<List<double>> x)
         {
             List<double> yFitted = new List<double>();
-            double[][] columns;
 
             foreach (List<double> list in x)
             {
                 if (list.Count != y.Count)
                     throw new MathError("List sizes are of different length");
             }
-
-            columns = Matrix.InvertVariableList(x);
+            double[][] columns = Matrix.InvertVariableList(x);
 
             double[] coefficients = Fit.MultiDim(columns, y.ToArray(), true);
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace RegressionAnalysis
@@ -44,7 +42,87 @@ namespace RegressionAnalysis
             Assert.Contains(list4, bestFit.getXVars());
             Assert.False(bestFit.getXVars().Contains(list2));
         }
-        
+
+        [Test]
+        public void test_SelectBestFit_performance_100000_observations_6_variables()
+        {
+            List<double> d1 = new List<double>();
+            List<double> d2 = new List<double>();
+            List<double> d3 = new List<double>();
+            List<double> d4 = new List<double>();
+            List<double> d5 = new List<double>();
+            List<double> d6 = new List<double>();
+
+            Random rand = new Random();
+            for (int i = 0; i < 100000; i++)
+            {
+                d1.Add(rand.Next(0, 100));
+                d2.Add(rand.Next(0, 100));
+                d3.Add(rand.Next(0, 100));
+                d4.Add(rand.Next(0, 100));
+                d5.Add(rand.Next(0, 100));
+                d6.Add(rand.Next(0, 100));
+            }
+
+            Variable list = new Variable("list", d1);
+            Variable list2 = new Variable("list2", d2);
+            Variable list3 = new Variable("list3", d3);
+            Variable list4 = new Variable("list4", d4);
+            Variable list5 = new Variable("list5", d5);
+            Variable list6 = new Variable("list6", d6);
+            List<Variable> x = new List<Variable>() { list2, list3, list4, list5, list6 };
+
+            Fitness adjR2 = new AdjustedR2();
+            Selection sel = new Selection(list, x, adjR2);
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            sel.SelectBestFit();
+            sw.Stop();
+            Console.WriteLine("took + " + sw.ElapsedMilliseconds + " milliseconds");
+            Assert.LessOrEqual(sw.ElapsedMilliseconds, 5000);
+        }
+
+        [Test]
+        public void test_SelectBestFit_performance_10000_observations_6_variables()
+        {
+            List<double> d1 = new List<double>();
+            List<double> d2 = new List<double>();
+            List<double> d3 = new List<double>();
+            List<double> d4 = new List<double>();
+            List<double> d5 = new List<double>();
+            List<double> d6 = new List<double>();
+
+            Random rand = new Random();
+            for (int i = 0; i < 10000; i++)
+            {
+                d1.Add(rand.Next(0, 100));
+                d2.Add(rand.Next(0, 100));
+                d3.Add(rand.Next(0, 100));
+                d4.Add(rand.Next(0, 100));
+                d5.Add(rand.Next(0, 100));
+                d6.Add(rand.Next(0, 100));
+            }
+
+            Variable list = new Variable("list", d1);
+            Variable list2 = new Variable("list2", d2);
+            Variable list3 = new Variable("list3", d3);
+            Variable list4 = new Variable("list4", d4);
+            Variable list5 = new Variable("list5", d5);
+            Variable list6 = new Variable("list6", d6);
+            List<Variable> x = new List<Variable>() { list2, list3, list4, list5, list6 };
+
+            Fitness adjR2 = new AdjustedR2();
+            Selection sel = new Selection(list, x, adjR2);
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            sel.SelectBestFit();
+            sw.Stop();
+            Console.WriteLine("took + " + sw.ElapsedMilliseconds + " milliseconds");
+            Assert.LessOrEqual(sw.ElapsedMilliseconds, 1000);
+        }
+
 
     }
 }

@@ -87,7 +87,6 @@ namespace RegressionAnalysis
                 if (model.fitness > maxFitness.fitness)
                     maxFitness = model;
             }
-
             return maxFitness;
         }
     }
