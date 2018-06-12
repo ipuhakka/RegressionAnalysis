@@ -1,12 +1,15 @@
-list <- c(2.2, 3.5, 3, 14)
+#Regression_tests.cs
 tolppa1 <- c(1, 1, 1, 1)
+list <- c(2.2, 3.5, 3, 14)
 list2 <- c(3, 15.2, 1.1, 2)
 list3 <- c(1, 2, 3, 4)
 
 X <- as.matrix(cbind(tolppa1, list2, list3))
 Y <- as.matrix(cbind(list))
 bh = round(solve(t(X)%*%X)%*%t(X)%*%Y, digits = 4)
+bh
 
+#Regression_tests.cs
 a <- c(1, 2, 3.5, 3.2)
 b <- c(1, 1.1, 1.2, 1.3)
 c <- c(17, 15.2, 13.1, 13.0)
@@ -15,7 +18,7 @@ bh = round(solve(t(Z)%*%Z)%*%t(Z)%*%Y, digits = 4)
 malli <- lm(list ~ a + b)
 
 
-#testing for fitted values, used in Fitness_tests.cs
+#testing for fitted values, used in ModelFit_tests.cs
 list <- c(2.2, 3.5, 3, 14, 8, 2)
 list2 <- c(3, 15.2, 1.1, 2, 3, 2)
 list3 <- c(1, 2, 3, 4, 5, 2.2)
