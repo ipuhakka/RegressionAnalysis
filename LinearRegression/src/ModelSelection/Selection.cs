@@ -11,7 +11,6 @@ namespace RegressionAnalysis
     /// </summary>
     class Selection
     {
-
         private List<Model> models;
         private Variable yVar;
         private List<Variable> xVars;

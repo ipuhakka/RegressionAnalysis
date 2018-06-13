@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Converter\CSV.cs" />
+    <Compile Include="src\Exception\InvalidCSVError.cs" />
     <Compile Include="src\Fitness\AdjustedR2.cs" />
     <Compile Include="src\Fitness\Fitness.cs" />
     <Compile Include="src\Matrix.cs" />
@@ -68,7 +70,7 @@
     <Compile Include="src\Regression.cs" />
     <Compile Include="src\Variance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\MathError.cs" />
+    <Compile Include="src\Exception\MathError.cs" />
     <Compile Include="test\ModelFit_tests.cs" />
     <Compile Include="test\Matrix_tests.cs" />
     <Compile Include="test\ModelSelection_tests\Model_tests.cs" />
