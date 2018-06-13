@@ -105,7 +105,7 @@ namespace RegressionAnalysis.Converter
 
                 try
                 {
-                    values = ValuesToDouble(columns[i]);
+                    values = ToDouble(columns[i]);
                 }
                 catch (FormatException e)
                 {
@@ -130,7 +130,7 @@ namespace RegressionAnalysis.Converter
         /// <param name="column">List of strings, each string is a double value.</param>
         /// <returns>List of doubles, column converted into double values.</returns>
         /// <exception cref="FormatException">Thrown if any double conversion fails.</exception>
-        private static List<double> ValuesToDouble(List<string> column)
+        private static List<double> ToDouble(List<string> column)
         {
             CultureInfo culture = CultureInfo.InvariantCulture;
 
