@@ -10,7 +10,7 @@ namespace RegressionAnalysis
     class Variable
     {
         [JsonProperty]
-        private string name;
+        public string name { get; }
         [JsonIgnore]
         public List<double> values { get; }
 

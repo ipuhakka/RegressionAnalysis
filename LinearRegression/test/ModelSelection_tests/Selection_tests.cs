@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using NUnit.Framework;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.test
 {   
     [TestFixture]
     class Selection_tests

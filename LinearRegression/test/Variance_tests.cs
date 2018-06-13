@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.test
 {
     [TestFixture]
     class Variance_tests

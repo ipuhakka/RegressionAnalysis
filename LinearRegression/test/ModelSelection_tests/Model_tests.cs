@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Newtonsoft.Json;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.test
 {
     [TestFixture]
     class Model_tests

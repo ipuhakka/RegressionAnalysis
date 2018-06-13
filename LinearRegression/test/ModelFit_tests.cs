@@ -4,7 +4,7 @@ using System.Linq;
 using System.Diagnostics;
 using NUnit.Framework;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.test
 {
     [TestFixture]
     class ModelFit_tests

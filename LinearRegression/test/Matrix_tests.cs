@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.test
 {
     [TestFixture]
     class Matrix_tests
