@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 
 namespace RegressionAnalysis
 {
     /// <summary>
     /// Class is used to select the most suitable model out of all possible combinations of
-    /// explanatory variables, based on a fitness value.
+    /// explanatory variables, based on a fitness value. Class divides models into subgroups, and each
+    /// subgroups maximum fitness is found in its own thread. This provides a somewhat better performance
+    /// with large data sets with more than 6 explanatory variables.
     /// </summary>
     class Selection
     {
+        private const int MODELS_PER_THREAD = 32;
         private List<Model> models;
+        private List<Model> bestModels;
         private Variable yVar;
         private List<Variable> xVars;
         public Fitness fitness { get; set; }
@@ -29,6 +34,7 @@ namespace RegressionAnalysis
                 throw new ArgumentNullException("Constructor doesn't accept null parameters.");
 
             models = new List<Model>();
+            bestModels = new List<Model>();
             yVar = y;
             xVars = x.ToList();
             fitness = fitness_param;
@@ -39,10 +45,20 @@ namespace RegressionAnalysis
         /// fitness.
         /// </summary>
         /// <returns>A model object which has the highest fitness value.</returns>
+        /// <exception cref="MathError">Thrown when evaluating fitness has failed, due to
+        /// different length variable lists, or invalid matrix type.</exception>
         public Model SelectBestFit()
         {
             SetCombinations(xVars);
-            return BestFit();
+            LaunchThreads();
+            try
+            {
+                return BestFit();
+            }
+            catch (MathError e)
+            {
+                throw e;
+            } 
         }
 
         /// <summary>
@@ -72,21 +88,84 @@ namespace RegressionAnalysis
         }
 
         /// <summary>
-        /// Calculates fitness value for a model and returns the model with max fitness.
+        /// Launches all threads to calculate their own groups max fitness value. 
+        /// </summary>
+        private void LaunchThreads()
+        {
+            int threadCount = Convert.ToInt32(Math.Ceiling(models.Count / (double)MODELS_PER_THREAD));
+            List<Thread> threads = new List<Thread>();
+
+            for (int i = 0; i < threadCount; i++)
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(BestSubFit));
+                threads.Add(t);
+                t.Start(i);
+            }
+
+            foreach (Thread t in threads)
+            {
+                t.Join();
+            } 
+
+            return;
+        }
+
+        /// <summary>
+        /// Finds the best fit from the list containing best models.
         /// </summary>
         /// <returns>Model with maximum fitness.</returns>
+        /// <exception cref="MathError">Thrown when evaluating fitness for models has failed.</exception>
         private Model BestFit()
         {
-            Model maxFitness = models[0];
+            if (bestModels.Count <= 0)
+                throw new MathError("Calculating fitness values for models failed. Either different " +
+                    "length variables where given, or matrix constructed from a model was invalid.");
 
-            foreach (Model model in models)
+            Model maxFitness = bestModels[0];
+
+            foreach (Model model in bestModels)
             {
-                model.fitness = fitness.EvaluateFitness(model.getYVar().values, model.getXVariableLists());
-
                 if (model.fitness > maxFitness.fitness)
                     maxFitness = model;
             }
             return maxFitness;
+        }
+
+        /// <summary>
+        /// Adds the best model to the list of bestModels. 
+        /// </summary>
+        /// <param name="obj">Integer, used to calculate what models fitness values are calculated.</param>
+        /// <exception cref="MathError">Thrown when parameter lists given where of different length.</exception>
+        /// <exception cref="ArgumentException">Thrown when fitting least square points on a created matrix fails.</exception>
+        private void BestSubFit(object obj)
+        {
+            int start = (int)obj * MODELS_PER_THREAD;
+            int end = start + MODELS_PER_THREAD;
+
+            if (end >= models.Count)
+                end = models.Count;
+
+            Model maxFitness = models[start];
+
+            for (int i = start; i < end; i++)
+            {
+                try
+                {
+                    models[i].fitness = fitness.EvaluateFitness(models[i].getYVar().values, models[i].getXVariableLists());
+                }
+                catch (MathError e)
+                {
+                    throw e;
+                }
+                catch (ArgumentException e)
+                {
+                    throw e;
+                }
+
+                if (models[i].fitness > maxFitness.fitness)
+                    maxFitness = models[i];
+            }
+            bestModels.Add(maxFitness);
         }
     }
 }

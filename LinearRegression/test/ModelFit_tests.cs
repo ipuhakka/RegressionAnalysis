@@ -28,6 +28,27 @@ namespace RegressionAnalysis.test
         }
 
         [Test]
+        public void test_AdjustedR2_throws_ArgumentException()
+        {
+            /* Trying to get coefficients for invalid matrix should produce ArgumentException.*/
+            List<double> y = new List<double>();
+            List<double> x1 = new List<double>();
+            List<double> x2 = new List<double>();
+            List<double> x3 = new List<double>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                y.Add(1);
+                x1.Add(1);
+                x2.Add(1);
+                x3.Add(1);
+            }
+
+            List<List<double>> expl = new List<List<double>>() { x1, x2, x3};
+            Assert.Throws<ArgumentException>(() => ModelFit.AdjustedR2(y, expl));
+        }
+
+        [Test]
         public void test_FittedValues()
         {
             /*Tested on R, a model lm(list ~ list2 + list3)
