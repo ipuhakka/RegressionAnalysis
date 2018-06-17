@@ -161,8 +161,7 @@ namespace RegressionAnalysis.test
         }
 
         [Test]
-        [Ignore("Takes between 15-20 seconds, run only if performance needs to be checked")]
-        public void test_SelectBestFit_performance_100000_observations_8_variables()
+        public void test_SelectBestFit_performance_10000_observations_10_variables()
         {
             List<double> d1 = new List<double>();
             List<double> d2 = new List<double>();
@@ -172,9 +171,11 @@ namespace RegressionAnalysis.test
             List<double> d6 = new List<double>();
             List<double> d7 = new List<double>();
             List<double> d8 = new List<double>();
+            List<double> d9 = new List<double>();
+            List<double> d10 = new List<double>();
 
             Random rand = new Random();
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 d1.Add(rand.Next(0, 100));
                 d2.Add(rand.Next(0, 100));
@@ -184,6 +185,8 @@ namespace RegressionAnalysis.test
                 d6.Add(rand.Next(0, 100));
                 d7.Add(rand.Next(0, 100));
                 d8.Add(rand.Next(0, 100));
+                d9.Add(rand.Next(0, 100));
+                d10.Add(rand.Next(0, 100));
             }
 
             Variable list = new Variable("list", d1);
@@ -194,7 +197,9 @@ namespace RegressionAnalysis.test
             Variable list6 = new Variable("list6", d6);
             Variable list7 = new Variable("list7", d7);
             Variable list8 = new Variable("list8", d8);
-            List<Variable> x = new List<Variable>() { list2, list3, list4, list5, list6, list7, list8 };
+            Variable list9 = new Variable("list9", d9);
+            Variable list10 = new Variable("list10", d10);
+            List<Variable> x = new List<Variable>() { list2, list3, list4, list5, list6, list7, list8, list9, list10 };
 
             Fitness adjR2 = new AdjustedR2();
             Selection sel = new Selection(list, x, adjR2);
@@ -204,7 +209,7 @@ namespace RegressionAnalysis.test
             sel.SelectBestFit();
             sw.Stop();
             Console.WriteLine("took + " + sw.ElapsedMilliseconds + " milliseconds");
-            Assert.LessOrEqual(sw.ElapsedMilliseconds, 20000);
+            Assert.LessOrEqual(sw.ElapsedMilliseconds, 10000);
         }
 
 

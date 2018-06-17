@@ -50,7 +50,7 @@ namespace RegressionAnalysis.Converter
         }
 
         /// <summary>
-        /// Splits string array into column lists
+        /// Splits string array into column lists.
         /// </summary>
         /// <param name="text">Array, where a row contains single observation data, or variable names.</param>
         /// <returns>List containing lists for every column in a csv-file.</returns>
@@ -84,7 +84,7 @@ namespace RegressionAnalysis.Converter
         }
 
         /// <summary>
-        /// Creates the tuple value to be returned by CSVToVariableModel.
+        /// Creates the tuple value to be returned by ToVariableModel.
         /// </summary>
         /// <param name="columns">Lists of columns, each first row contains name for the variable.</param>
         /// <param name="responseVariable">string indicating what variable is the response variable.</param>

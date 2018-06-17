@@ -88,7 +88,8 @@ namespace RegressionAnalysis
         }
 
         /// <summary>
-        /// Launches all threads to calculate their own groups max fitness value. 
+        /// Launches all threads to calculate their own groups max fitness value. Threads are used 
+        /// for better performance on larger lists.
         /// </summary>
         private void LaunchThreads()
         {
@@ -132,9 +133,9 @@ namespace RegressionAnalysis
         }
 
         /// <summary>
-        /// Adds the best model to the list of bestModels. 
+        /// Adds the best model from subgroup of models to bestModels. 
         /// </summary>
-        /// <param name="obj">Integer, used to calculate what models fitness values are calculated.</param>
+        /// <param name="obj">Integer, used to calculate what subgroup of variable models fitness values are calculated.</param>
         /// <exception cref="MathError">Thrown when parameter lists given where of different length.</exception>
         /// <exception cref="ArgumentException">Thrown when fitting least square points on a created matrix fails.</exception>
         private void BestSubFit(object obj)
