@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.ModelSelection
 {
-    class Model
+    public class Model
     {
         [JsonProperty]
         public double fitness { get; set; }

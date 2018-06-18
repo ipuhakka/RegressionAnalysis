@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using NUnit.Framework;
+using RegressionAnalysis.Exception;
+using RegressionAnalysis;
 
-namespace RegressionAnalysis.test
+namespace RegressionAnalysisTest
 {
     [TestFixture]
     class ModelFit_tests

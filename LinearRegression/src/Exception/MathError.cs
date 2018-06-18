@@ -1,8 +1,7 @@
-﻿using System;
-
-namespace RegressionAnalysis
+﻿
+namespace RegressionAnalysis.Exception
 {
-    public class MathError: Exception
+    public class MathError: System.Exception
     {
         public string error;
 

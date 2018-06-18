@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using RegressionAnalysis.Converter;
+using RegressionAnalysis.Exception;
+using RegressionAnalysis.ModelSelection;
 
-namespace RegressionAnalysis.test
+namespace RegressionAnalysisTest
 {
     [TestFixture]
     class CSV_tests

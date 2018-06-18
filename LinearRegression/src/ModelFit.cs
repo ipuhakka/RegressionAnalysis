@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using RegressionAnalysis.Exception;
 using MathNet.Numerics;
 
 namespace RegressionAnalysis
 {
-    class ModelFit
+    public class ModelFit
     {
 
         /// <summary>

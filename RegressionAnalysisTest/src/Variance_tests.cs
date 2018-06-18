@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using RegressionAnalysis;
+using RegressionAnalysis.Exception;
 
-namespace RegressionAnalysis.test
+namespace RegressionAnalysisTest
 {
     [TestFixture]
     class Variance_tests

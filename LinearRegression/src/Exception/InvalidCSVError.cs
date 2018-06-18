@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RegressionAnalysis
+﻿
+namespace RegressionAnalysis.Exception
 {
-    class InvalidCSVError: Exception
+    public class InvalidCSVError: System.Exception
     {
         public string error;
 

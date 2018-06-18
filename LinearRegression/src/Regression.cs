@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using MathNet.Numerics.LinearAlgebra;
+using RegressionAnalysis.Exception;
 
 namespace RegressionAnalysis
 {

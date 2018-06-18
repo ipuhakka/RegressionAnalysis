@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-
+using RegressionAnalysis.Exception;
+using RegressionAnalysis.ModelSelection;
 
 namespace RegressionAnalysis.Converter
 {
-    class CSV
+    public class CSV
     {
 
         /// <summary>

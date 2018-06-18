@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using RegressionAnalysis.Evaluation;
+using RegressionAnalysis.Exception;
 
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.ModelSelection
 {
     /// <summary>
     /// Class is used to select the most suitable model out of all possible combinations of
@@ -12,7 +14,7 @@ namespace RegressionAnalysis
     /// subgroups maximum fitness is found in its own thread. This provides a somewhat better performance
     /// with large data sets with more than 6 explanatory variables.
     /// </summary>
-    class Selection
+    public class Selection
     {
         private const int MODELS_PER_THREAD = 32;
         private List<Model> models;

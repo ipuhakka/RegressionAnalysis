@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using RegressionAnalysis.Exception;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.Evaluation
 {
     public class AdjustedR2: Fitness
     {

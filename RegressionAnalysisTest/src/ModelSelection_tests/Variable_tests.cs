@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Newtonsoft.Json;
+using RegressionAnalysis.ModelSelection;
 
-namespace RegressionAnalysis.test
+namespace RegressionAnalysisTest
 {
     [TestFixture]
     class Variable_tests

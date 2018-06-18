@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using NUnit.Framework;
+using RegressionAnalysis.ModelSelection;
+using RegressionAnalysis.Evaluation;
+using RegressionAnalysis.Exception;
 
-namespace RegressionAnalysis.test
+namespace RegressionAnalysisTest
 {   
     [TestFixture]
     class Selection_tests

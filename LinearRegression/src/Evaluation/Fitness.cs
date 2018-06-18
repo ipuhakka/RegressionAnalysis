@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.Evaluation
 {
     public interface Fitness
     {

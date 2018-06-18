@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace RegressionAnalysis
+namespace RegressionAnalysis.ModelSelection
 {
-    class Variable
+    public class Variable
     {
         [JsonProperty]
         public string name { get; }
