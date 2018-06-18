@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using NUnit.Framework;
-using RegressionAnalysis.Exception;
 using RegressionAnalysis;
+using RegressionAnalysis.Exception;
 
 namespace RegressionAnalysisTest
 {
