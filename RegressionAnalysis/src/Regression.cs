@@ -85,25 +85,12 @@ namespace RegressionAnalysis
 
             x.Insert(0, ones);
 
-            try
-            {
-                Matrix<double> X = Matrix.Convert(x);
-                Vector<double> yVector = Vector<double>.Build.DenseOfArray(y.ToArray());
-                Vector<double> betaVector = (X.Transpose() * X).Inverse() * (X.Transpose() * yVector);
-                double[] betaArray = betaVector.ToArray();
+            Matrix<double> X = Matrix.Convert(x);
+            Vector<double> yVector = Vector<double>.Build.DenseOfArray(y.ToArray());
+            Vector<double> betaVector = (X.Transpose() * X).Inverse() * (X.Transpose() * yVector);
+            double[] betaArray = betaVector.ToArray();
 
-                return betaArray.ToList();
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
+            return betaArray.ToList();
         }
     }
 }

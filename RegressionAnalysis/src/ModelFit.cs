@@ -23,19 +23,8 @@ namespace RegressionAnalysis
             int n = y.Count;
             int k = x.Count;
 
-            try
-            {
-                fitted = FittedValues(y, x);
-            }
-            catch (MathError e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }
+            fitted = FittedValues(y, x);
+
             double R2 = GoodnessOfFit.CoefficientOfDetermination(fitted, y);
 
             return 1 - (((1 - R2) * (n - 1)) / (n - k - 1));
@@ -59,15 +48,10 @@ namespace RegressionAnalysis
                 if (list.Count != y.Count)
                     throw new MathError("List sizes are of different length");
             }
-            try
-            {
-                double[] coefficients = GetCoefficients(y, x);
-                return CalculateFittedValues(coefficients, y, x);
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }
+
+            double[] coefficients = GetCoefficients(y, x);
+            return CalculateFittedValues(coefficients, y, x);
+
         }
 
         /// <summary>
@@ -109,16 +93,9 @@ namespace RegressionAnalysis
         private static double[] GetCoefficients(List<double> y, List<List<double>> x)
         {
             double[][] columns = Matrix.InvertVariableList(x);
-
             double[] coefficients;
-            try
-            {
-                coefficients = Fit.MultiDim(columns, y.ToArray(), true);
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }
+
+            coefficients = Fit.MultiDim(columns, y.ToArray(), true);
 
             return coefficients;
         }

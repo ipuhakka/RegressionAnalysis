@@ -152,18 +152,7 @@ namespace RegressionAnalysis.ModelSelection
 
             for (int i = start; i < end; i++)
             {
-                try
-                {
-                    models[i].fitness = fitness.EvaluateFitness(models[i].getYVar().values, models[i].getXVariableLists());
-                }
-                catch (MathError e)
-                {
-                    throw e;
-                }
-                catch (ArgumentException e)
-                {
-                    throw e;
-                }
+                models[i].fitness = fitness.EvaluateFitness(models[i].getYVar().values, models[i].getXVariableLists());
 
                 if (models[i].fitness > maxFitness.fitness)
                     maxFitness = models[i];

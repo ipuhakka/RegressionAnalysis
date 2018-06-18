@@ -62,6 +62,7 @@
     <Compile Include="src\Converter_tests\CSV_tests.cs" />
     <Compile Include="src\Matrix_tests.cs" />
     <Compile Include="src\ModelFit_tests.cs" />
+    <Compile Include="src\ModelSelection_tests\BackwardElimination_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Model_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Selection_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Variable_tests.cs" />

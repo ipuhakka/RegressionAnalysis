@@ -34,6 +34,11 @@ namespace RegressionAnalysis.ModelSelection
             xVars = x.ToList();
         }
 
+        public Model Clone()
+        {
+            return new Model(this.yVar, this.xVars);
+        }
+
         public List<Variable> getXVars() { return xVars; }
         public Variable getYVar() { return yVar; }
 

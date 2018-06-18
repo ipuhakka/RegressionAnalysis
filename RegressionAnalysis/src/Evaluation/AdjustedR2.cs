@@ -17,18 +17,7 @@ namespace RegressionAnalysis.Evaluation
         /// <exception cref="ArgumentException">Thrown when matrix created from parameters is not valid to fit least square points.</exception>
         public double EvaluateFitness(List<double> y, List<List<double>> x)
         {
-            try
-            {
-                return ModelFit.AdjustedR2(y, x);
-            }
-            catch (MathError e)
-            {
-                throw e;
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }
+            return ModelFit.AdjustedR2(y, x);
         }
 
     }

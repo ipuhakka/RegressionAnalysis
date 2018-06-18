@@ -36,18 +36,7 @@ namespace RegressionAnalysis.Converter
                 throw e;
             }
 
-            try
-            {
-                return CreateTuple(columns, responseVariable);
-            }
-            catch (ArgumentException e)
-            {
-                throw e;
-            }           
-            catch (FormatException f)
-            {
-                throw f;
-            }
+            return CreateTuple(columns, responseVariable);
         }
 
         /// <summary>
@@ -104,14 +93,7 @@ namespace RegressionAnalysis.Converter
                 columns[i].RemoveAt(0);
                 List<double> values;
 
-                try
-                {
-                    values = ToDouble(columns[i]);
-                }
-                catch (FormatException e)
-                {
-                    throw e;
-                }
+                values = ToDouble(columns[i]);
 
                 if (name.Equals(responseVariable))
                     response = new Variable(name, values);

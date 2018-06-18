@@ -14,20 +14,17 @@ namespace RegressionAnalysis
         /// </summary>
         /// <param name="columns"></param>
         /// <returns>Matrix object constructed from columns.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when list lengths arent positive.</exception>
+        /// <exception cref="ArgumentException">Thrown when columns can't be converted into a matrix. </exception>
         public static Matrix<double> Convert(List<List<double>> columns)
         {
             var M = Matrix<double>.Build;
             double[][] cols = columns.Select(a => a.ToArray()).ToArray();
 
-            try
-            {
-                var matrix = M.DenseOfColumnArrays(cols);
-                return matrix;
-            }
-            catch (ArgumentOutOfRangeException e) {
-                Console.WriteLine(e.StackTrace);
-                throw e;              
-            }
+            var matrix = M.DenseOfColumnArrays(cols);
+            return matrix;
+
+
         }
 
         /// <summary>

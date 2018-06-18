@@ -40,7 +40,7 @@ bestSubByAdjr2 <- which.max(bestSubSummary$adjr2)
 bestSubByAdjr2
 
 #suggesting best model by adjustedR2 is with list3 and list4,
-#making sure of the results
+#making sure of the results in BackwardElimination_tests.cs
 malli1 <- lm(list~list2)
 malli2 <- lm(list~list3)
 malli3 <- lm(list~list4)

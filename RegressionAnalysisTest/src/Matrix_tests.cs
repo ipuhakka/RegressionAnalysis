@@ -42,7 +42,7 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
-        public void testConvert_Catches_ArgumentOutOfRange()
+        public void testConvert_throws_ArgumentOutOfRange()
         {
             /*MathNet Conversion should catch ArgumentOutOfRange exceptions 
             when number of rows of a matrix isn't positive.*/
@@ -53,6 +53,32 @@ namespace RegressionAnalysisTest
             List<List<double>> columns = new List<List<double>>() { list1, list2 };
 
             Assert.Throws<ArgumentOutOfRangeException>(() => Matrix.Convert(columns));
+        }
+
+        [Test]
+        public void testConvert_throws_ArgumentException_differentSizedLists()
+        {
+            /*MathNet Conversion should catch ArgumentException 
+            when number of rows of a matrix isn't the same.*/
+            List<double> list1 = new List<double>();
+            List<double> list2 = new List<double>();
+            List<double> list3 = new List<double>();
+            List<double> list4 = new List<double>();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                list1.Add(2);
+                list2.Add(3);
+            }
+
+            for (int j = 0; j < 9999; j++)
+            {
+                list3.Add(2);
+                list4.Add(3);
+            }
+            List<List<double>> columns = new List<List<double>>() { list1, list2, list3, list4 };
+
+            Assert.Throws<ArgumentException>(() => Matrix.Convert(columns));
         }
 
         [Test]
