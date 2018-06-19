@@ -21,7 +21,7 @@ namespace RegressionAnalysis.ModelSelection
         /// <returns>Model that best explains the response variability according to the fitness
         /// criteria.</returns>
         /// <exception cref="MathError">Thrown when parameter lists are of different length.</exception>
-        /// <exception cref="ArgumentException">Thrown when matrix created from parameters is not valid to fit least square points.</exception>
+        /// <exception cref="ArgumentException">Thrown when matrix created from parameter fullModel is not valid to fit least square points.</exception>
         public Model FindBestModel(Model fullModel, Fitness fitness)
         {
             /*Calculate fitness for full model, go through all n - 1, if any is better than 

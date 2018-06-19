@@ -26,16 +26,7 @@ namespace RegressionAnalysis.Converter
         {
             string[] allText = File.ReadAllLines(filePath);
             List<List<string>> columns;
-            try
-            {
-                columns = ToColumns(allText);
-            }
-            catch (InvalidCSVError e)
-            {
-                Console.WriteLine(e.error);
-                throw e;
-            }
-
+            columns = ToColumns(allText);
             return CreateTuple(columns, responseVariable);
         }
 
