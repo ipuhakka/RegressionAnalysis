@@ -30,7 +30,7 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
-        public void test_AdjustedR2_throws_ArgumentException()
+        public void test_AdjustedR2_throws_MathError()
         {
             /* Trying to get coefficients for invalid matrix should produce ArgumentException.*/
             List<double> y = new List<double>();
@@ -47,7 +47,7 @@ namespace RegressionAnalysisTest
             }
 
             List<List<double>> expl = new List<List<double>>() { x1, x2, x3};
-            Assert.Throws<ArgumentException>(() => ModelFit.AdjustedR2(y, expl));
+            Assert.Throws<MathError>(() => ModelFit.AdjustedR2(y, expl));
         }
 
         [Test]
@@ -78,8 +78,9 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
-        public void test_AdjustedR2_throws_MathError()
+        public void test_AdjustedR2_throws_MathError_Different_Sized_Lists()
         {
+            /*Different sized lists throw MathError*/
             List<double> y = new List<double>() { 2, 3 };
 
             List<List<double>> lists = new List<List<double>>() { list, list2, list3 };

@@ -22,9 +22,22 @@ namespace RegressionAnalysis.Converter
         /// <exception cref="FormatException">Thrown when converting any value to double fails.</exception>
         /// <exception cref="InvalidCSVError">Thrown when a row in text array has a different amount of
         /// data than the first row of the text array.</exception>
+        /// <exception cref="IOException">Thrown when reading all lines of filePath fails.</exception>
         public static Model ToModel(string filePath, string responseVariable)
         {
-            string[] allText = File.ReadAllLines(filePath);
+            if (filePath == null || responseVariable == null)
+                throw new ArgumentNullException("No null parameters are allowed");
+
+            string[] allText;
+            try
+            {
+                allText = File.ReadAllLines(filePath);
+            }
+            catch (IOException)
+            {
+                throw new IOException("File could not be used");
+            } 
+
             List<List<string>> columns;
             columns = ToColumns(allText);
             return CreateModel(columns, responseVariable);

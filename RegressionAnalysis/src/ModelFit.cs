@@ -95,8 +95,14 @@ namespace RegressionAnalysis
             double[][] columns = Matrix.InvertVariableList(x);
             double[] coefficients;
 
-            coefficients = Fit.MultiDim(columns, y.ToArray(), true);
-
+            try
+            {
+                coefficients = Fit.MultiDim(columns, y.ToArray(), true);
+            }
+            catch (ArgumentException)
+            {
+                throw new MathError("Matrix constructed wasn't a positive definite");
+            }
             return coefficients;
         }
 

@@ -51,9 +51,9 @@ namespace RegressionAnalysisTest.ModelSelection_tests
         }
 
         [Test]
-        public void test_FindBestModel_Throws_ArgumentException()
+        public void test_FindBestModel_Throws_MathError()
         {
-            /*Incorrect matrix throws ArgumentException in ModelFit.GetCoefficients.*/
+            /*Incorrect matrix throws MathError in ModelFit.GetCoefficients.*/
             Variable list = new Variable("list", new List<double>() { 1,1,1,1,1 });
 
             Variable list2 = new Variable("list2", new List<double>() { 1, 1, 1, 1, 1 });
@@ -64,7 +64,7 @@ namespace RegressionAnalysisTest.ModelSelection_tests
             Model testModel = new Model(list, x);
 
             BackwardElimination be = new BackwardElimination();
-            Assert.Throws<ArgumentException>(() => be.FindBestModel(testModel, fitness));
+            Assert.Throws<MathError>(() => be.FindBestModel(testModel, fitness));
         }
 
         [Test]

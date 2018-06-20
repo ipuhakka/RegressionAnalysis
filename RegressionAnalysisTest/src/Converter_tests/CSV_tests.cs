@@ -26,6 +26,20 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
+        public void test_ToModel_throws_FileNotFoundException()
+        {
+            string filepath = "this_file_is_not_found";
+            Assert.Throws<IOException>(() => CSV.ToModel(filepath, "Var1"));
+        }
+
+        [Test]
+        public void test_ToModel_throws_ArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => CSV.ToModel(null, ""));
+            Assert.Throws<ArgumentNullException>(() => CSV.ToModel("", null));
+        }
+
+        [Test]
         public void test_ToModel_throws_InvalidCSVError()
         {
             /*File where row parameter count changes should throw InvalidCSVError.*/
