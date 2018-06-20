@@ -22,12 +22,12 @@ namespace RegressionAnalysis.Converter
         /// <exception cref="FormatException">Thrown when converting any value to double fails.</exception>
         /// <exception cref="InvalidCSVError">Thrown when a row in text array has a different amount of
         /// data than the first row of the text array.</exception>
-        public static Tuple<Variable, List<Variable>> ToVariableModel(string filePath, string responseVariable)
+        public static Model ToModel(string filePath, string responseVariable)
         {
             string[] allText = File.ReadAllLines(filePath);
             List<List<string>> columns;
             columns = ToColumns(allText);
-            return CreateTuple(columns, responseVariable);
+            return CreateModel(columns, responseVariable);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace RegressionAnalysis.Converter
         /// <exception cref="ArgumentException">Thrown when no column name matches parameter
         /// responseVariable.</exception>
         /// <exception cref="FormatException">Thrown when converting any value to double fails.</exception>
-        private static Tuple<Variable, List<Variable>> CreateTuple(List<List<string>> columns, string responseVariable)
+        private static Model CreateModel(List<List<string>> columns, string responseVariable)
         {
             Variable response = null;
             List<Variable> explanatory = new List<Variable>();
@@ -93,7 +93,7 @@ namespace RegressionAnalysis.Converter
             }
 
             if (response != null)
-                return Tuple.Create(response, explanatory);
+                return new Model(response, explanatory);
             else
                 throw new ArgumentException("No response variable named " + responseVariable + " was found");
         }
