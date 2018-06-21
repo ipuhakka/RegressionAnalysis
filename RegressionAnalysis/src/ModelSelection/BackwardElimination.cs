@@ -32,7 +32,7 @@ namespace RegressionAnalysis.ModelSelection
 
             Model bestModel = fullModel;
             criteria = fitness;
-            bestModel.fitness = fitness.EvaluateFitness(bestModel.getYVar().values, bestModel.getXVariableLists());
+            bestModel.fitness = fitness.EvaluateFitness(bestModel);
 
             int n = fullModel.getXVars().Count;
 
@@ -66,7 +66,7 @@ namespace RegressionAnalysis.ModelSelection
             {
                 models.Add(model.Clone());
                 models[i].getXVars().RemoveAt(i);
-                models[i].fitness = criteria.EvaluateFitness(models[i].getYVar().values, models[i].getXVariableLists());
+                models[i].fitness = criteria.EvaluateFitness(models[i]);
             }
             bestModel = models[0];
 

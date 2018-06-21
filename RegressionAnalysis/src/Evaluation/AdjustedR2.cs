@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using RegressionAnalysis.Exception;
+﻿using RegressionAnalysis.ModelSelection;
 
 namespace RegressionAnalysis.Evaluation
 {
@@ -15,9 +13,9 @@ namespace RegressionAnalysis.Evaluation
         /// and observations.</returns>
         /// <exception cref="MathError">Thrown when parameter lists are of different length.</exception>
         /// <exception cref="ArgumentException">Thrown when matrix created from parameters is not valid to fit least square points.</exception>
-        public double EvaluateFitness(List<double> y, List<List<double>> x)
+        public double EvaluateFitness(Model m)
         {
-            return ModelFit.AdjustedR2(y, x);
+            return ModelFit.AdjustedR2(m.getYVar().values, m.getXVariableLists());
         }
 
     }
