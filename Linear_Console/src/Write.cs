@@ -1,4 +1,5 @@
 ﻿using System;
+using RegressionAnalysis.ModelSelection;
 
 namespace Linear_Console
 {
@@ -28,5 +29,19 @@ namespace Linear_Console
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Prints model and its fitness value to the console.
+        /// </summary>
+        /// <param name="model"></param>
+        public static void Model(Model model)
+        {
+            Console.Write("Model: " + model.getYVar().name + " ");
+            foreach (Variable v in model.getXVars())
+            {
+                Console.Write(v.name + " ");
+            }
+
+            Console.Write("fitness: " + model.fitness + "\n");
+        }
     }
 }

@@ -17,14 +17,13 @@ namespace Linear_Console
         /// <summary>
         /// Main loop for the console application. Takes user inputs in a loop and handles it accordingly. 
         /// </summary>
-        /// <returns>0 on succesful quit, -1 on error.</returns>
         public static void Start()
         {
             string input = "";
 
             while (!input.Equals("q"))
             {
-                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3. Backward elimination analysis\n\nType 'q' for quitting");
+                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3. Model analysis\n\nType 'q' for quitting");
                 input = Console.ReadLine();
                 handleInput(input);
             }
@@ -35,7 +34,7 @@ namespace Linear_Console
         /// </summary>
         /// <param name="input">user given input.</param>
         /// <returns>-1 on error, 0 on success.</returns>
-        private static int handleInput(string input)
+        private static void handleInput(string input)
         {
             switch (input)
             {
@@ -46,30 +45,29 @@ namespace Linear_Console
                     setResponse();
                     break;
                 case "3":
-                    DoBackwardElimination();
+                    selectAnalysisMethod();
                     break;
                 case "q":
-                    return 0;
+                    return;
 
                 default:
                     Write.Error("Unexpected input");
-                    return -1;
+                    return;
             }
 
-            return 0;
+            return;
         }
 
         /// <summary>
         /// Prints variable names, sets response variable based on user input.
         /// </summary>
-        /// <returns>0 if input variable is found, -1 otherwise.</returns>
-        private static int setResponse()
+        private static void setResponse()
         {
             if (filepath == null)
             {
                 Write.Error("Please select a file before choosing response variable");
                 variables = null;
-                return -1;
+                return;
             }
 
             Console.Write("Varibles: ");
@@ -85,43 +83,81 @@ namespace Linear_Console
             {
                 responseVariable = resp;
                 Write.Success(resp + " set as response variable");
-                return 0;
+                return;
             }
             else
                 Write.Error("Variable '" + resp + "' not found");
 
-            return -1;
+            return;
         }
 
-        private static int DoBackwardElimination()
+        private static void selectAnalysisMethod()
+        {
+            Console.WriteLine("1. Backward elimination\n2. Select best adjusted R2");
+            string result = Console.ReadLine();
+
+            switch (result)
+            {
+                case "1":
+                    DoBackwardElimination();
+                    break;
+                case "2":
+                    DoModelSelection();
+                    break;
+                default:
+                    Write.Error("Unexpected input");
+                    break;
+            }
+        }
+
+        private static void DoModelSelection()
         {
             Model model, results;
-            if (filepath == null || responseVariable == null)
+            if (filepath == null)
             {
-                Write.Error("Please read file and set response variable before completing analysis");
-                return -1;
+                Write.Error("No file read in");
+                return;
             }
 
+            if (responseVariable == null)
+            {
+                Write.Error("No response variable selected");
+                return;
+            }
+
+            model = CSV.ToModel(filepath, responseVariable);
+            Selection sel = new Selection(model, fitness);
+            results = sel.SelectBestFit();
+            Write.Model(results);
+        }
+
+        private static void DoBackwardElimination()
+        {
+            Model model, results;
+            if (filepath == null)
+            {
+                Write.Error("No file read in");
+                return;
+            }
+
+            if (responseVariable == null)
+            {
+                Write.Error("No response variable selected");
+                return;
+            }
 
             model = CSV.ToModel(filepath, responseVariable);
             BackwardElimination be = new BackwardElimination();
             try
             {
                 results = be.FindBestModel(model, fitness);
-
-                Console.Write("Model: " + results.getYVar().name + " ");
-                foreach (Variable v in results.getXVars())
-                {
-                    Console.Write(v.name + " ");
-                }
-
-                Console.Write("fitness: " + results.fitness + "\n");
-                return 0;
+                Write.Model(results);
+                return;
             }
             catch (MathError)
             {
                 Write.Error("Matrix constructed from csv-file was of incorrect type");
-                return -1;
+                return;
             }
         }
     }

@@ -9,8 +9,7 @@ namespace Linear_Console
         /// <summary>
         /// Reads a csv-file, and sets variables based on the first row of the file.
         /// </summary>
-        /// <returns>-1 on erroneous behaviour, 0 on success.</returns>
-        public static int Read()
+        public static void Read()
         {
             Console.Write("Input path to file: ");
             string filepath = Console.ReadLine();
@@ -18,7 +17,7 @@ namespace Linear_Console
             if (Path.GetExtension(filepath) != ".csv")
             {
                 Write.Error("File needs to be in csv-format");
-                return -1;
+                return;
             } 
             string[] text;
 
@@ -31,7 +30,7 @@ namespace Linear_Console
                 Console.WriteLine(e.ToString());
                 Console_Main.variables = null;
                 Console_Main.filepath = null;
-                return -1;
+                return;
             }
 
             var names = text[0].Split(',');
@@ -45,7 +44,7 @@ namespace Linear_Console
             Console_Main.filepath = filepath;
 
             Write.Success("File read\n\n");
-            return 0;
+            return;
         }
 
     }

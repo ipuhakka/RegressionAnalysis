@@ -19,8 +19,7 @@ namespace RegressionAnalysis.ModelSelection
         private const int MODELS_PER_THREAD = 32;
         private List<Model> models;
         private List<Model> bestModels;
-        private Variable yVar;
-        private List<Variable> xVars;
+        private Model baseModel;
         public Fitness fitness { get; set; }
 
         /// <summary>
@@ -30,15 +29,14 @@ namespace RegressionAnalysis.ModelSelection
         /// <param name="y">Response variable.</param>
         /// <param name="fitness_param">Implementation of Fitness interface.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Selection(Variable y, List<Variable> x, Fitness fitness_param)
+        public Selection(Model model, Fitness fitness_param)
         {
-            if (x == null || y == null || fitness_param == null)
+            if (model == null || fitness_param == null)
                 throw new ArgumentNullException("Constructor doesn't accept null parameters.");
 
             models = new List<Model>();
             bestModels = new List<Model>();
-            yVar = y;
-            xVars = x.ToList();
+            baseModel = model.Clone();
             fitness = fitness_param;
         }
 
@@ -51,7 +49,7 @@ namespace RegressionAnalysis.ModelSelection
         /// different length variable lists, or invalid matrix type.</exception>
         public Model SelectBestFit()
         {
-            SetCombinations(xVars);
+            SetCombinations(baseModel.getXVars());
             LaunchThreads();
             try
             {
@@ -84,7 +82,7 @@ namespace RegressionAnalysis.ModelSelection
                     }
                 }
                 if (combination.Count > 0)
-                    models.Add(new Model(yVar, combination));
+                    models.Add(new Model(baseModel.getYVar(), combination));
             }
 
         }
