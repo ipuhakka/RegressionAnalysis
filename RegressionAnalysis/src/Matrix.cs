@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace RegressionAnalysis
@@ -19,12 +18,9 @@ namespace RegressionAnalysis
         public static Matrix<double> Convert(List<List<double>> columns)
         {
             var M = Matrix<double>.Build;
-            double[][] cols = columns.Select(a => a.ToArray()).ToArray();
 
-            var matrix = M.DenseOfColumnArrays(cols);
+            var matrix = M.DenseOfColumns(columns);
             return matrix;
-
-
         }
 
         /// <summary>
