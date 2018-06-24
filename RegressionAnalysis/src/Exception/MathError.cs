@@ -1,5 +1,4 @@
-﻿
-namespace RegressionAnalysis.Exception
+﻿namespace RegressionAnalysis.Exception
 {
     public class MathError: System.Exception
     {

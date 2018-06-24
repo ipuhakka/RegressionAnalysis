@@ -1,5 +1,4 @@
-﻿
-namespace Linear_Console
+﻿namespace Linear_Console
 {
     /// <summary>
     /// An example application to use RegressionAnalysis library code.

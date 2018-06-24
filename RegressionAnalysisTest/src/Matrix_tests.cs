@@ -82,6 +82,15 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
+        public void test_InvertVariableList1List()
+        {
+            List<double> list1 = new List<double>() { 1, 2, 4, 3 };
+            List<List<double>> lists = new List<List<double>>() { list1 };
+
+            Assert.DoesNotThrow(() => Matrix.InvertVariableList(lists));
+        }
+
+        [Test]
         public void testInvertVariableList()
         {
             List<double> list1 = new List<double>() { 1, 2, 4, 3 };

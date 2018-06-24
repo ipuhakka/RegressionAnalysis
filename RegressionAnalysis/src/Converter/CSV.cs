@@ -9,7 +9,6 @@ namespace RegressionAnalysis.Converter
 {
     public class CSV
     {
-
         /// <summary>
         /// Converts a csv-file into a Tuple containing response variable, and list of explanatory variables. Assumes that
         /// csv-file has column names in the first row.

@@ -1,4 +1,5 @@
-﻿using RegressionAnalysis.ModelSelection;
+﻿using System.Collections.Generic;
+using RegressionAnalysis.ModelSelection;
 
 namespace RegressionAnalysis.Evaluation
 {
@@ -16,6 +17,22 @@ namespace RegressionAnalysis.Evaluation
         public double EvaluateFitness(Model m)
         {
             return ModelFit.AdjustedR2(m.getYVar().values, m.getXVariableLists());
+        }
+
+        /// <summary>
+        /// Returns true when new model has a higher fitness value (as higher adjusted R2 value
+        /// is better.)
+        /// </summary>
+        /// <param name="currentBest">The model that is being compared against.</param>
+        /// <param name="newModel">Model that is being tested on whether it has a higher fitness
+        /// than the current best model.</param>
+        /// <returns>true if new model has a higher adjusted R2 value, false if not.</returns>
+        public bool IsBetter(Model currentBest, Model newModel)
+        {
+            if (newModel.fitness > currentBest.fitness)
+                return true;
+            else
+                return false;
         }
 
     }

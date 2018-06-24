@@ -48,7 +48,7 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
-        public void test_JsonSerialization()
+        public void test_JsonSerialization_Model()
         {
             /*Converting Model-object to json should produce object with only attributes marked with [JsonProperty]. */
             Variable y = new Variable("", new List<double>() { });

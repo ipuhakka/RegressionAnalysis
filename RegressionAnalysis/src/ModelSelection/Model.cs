@@ -7,7 +7,6 @@ namespace RegressionAnalysis.ModelSelection
 {
     public class Model
     {
-        [JsonProperty]
         public double fitness { get; set; }
         [JsonProperty]
         private Variable yVar;

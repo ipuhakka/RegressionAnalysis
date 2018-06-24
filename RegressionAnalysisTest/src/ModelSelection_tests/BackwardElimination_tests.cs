@@ -129,7 +129,7 @@ namespace RegressionAnalysisTest.ModelSelection_tests
             be.FindBestModel(model, adjR2);
             sw.Stop();
             Console.WriteLine("took + " + sw.ElapsedMilliseconds + " milliseconds");
-            Assert.LessOrEqual(sw.ElapsedMilliseconds, 3000);
+            Assert.LessOrEqual(sw.ElapsedMilliseconds, 4000);
         }
 
     }

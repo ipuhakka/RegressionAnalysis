@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using RegressionAnalysis.Evaluation;
 using RegressionAnalysis.Exception;
@@ -126,7 +125,7 @@ namespace RegressionAnalysis.ModelSelection
 
             foreach (Model model in bestModels)
             {
-                if (model.fitness > maxFitness.fitness)
+                if (fitness.IsBetter(maxFitness, model))
                     maxFitness = model;
             }
             return maxFitness;
@@ -152,7 +151,7 @@ namespace RegressionAnalysis.ModelSelection
             {
                 models[i].fitness = fitness.EvaluateFitness(models[i]);
 
-                if (models[i].fitness > maxFitness.fitness)
+                if (fitness.IsBetter(maxFitness, models[i]))
                     maxFitness = models[i];
             }
             bestModels.Add(maxFitness);
