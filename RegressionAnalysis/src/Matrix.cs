@@ -18,7 +18,6 @@ namespace RegressionAnalysis
         public static Matrix<double> Convert(List<List<double>> columns)
         {
             var M = Matrix<double>.Build;
-
             var matrix = M.DenseOfColumns(columns);
             return matrix;
         }

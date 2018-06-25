@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using NUnit.Framework;
 using RegressionAnalysis.ModelSelection;
 using RegressionAnalysis.Evaluation;
 using RegressionAnalysis.Exception;
+using RegressionAnalysis.Converter;
 
 namespace RegressionAnalysisTest
 {   
@@ -86,50 +88,15 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
-        public void test_SelectBestFit_performance_10000_observations_10_variables()
+        public void test_SelectBestFit_performance_10000_observations_6_variables()
         {
-            List<double> d1 = new List<double>();
-            List<double> d2 = new List<double>();
-            List<double> d3 = new List<double>();
-            List<double> d4 = new List<double>();
-            List<double> d5 = new List<double>();
-            List<double> d6 = new List<double>();
-            List<double> d7 = new List<double>();
-            List<double> d8 = new List<double>();
-            List<double> d9 = new List<double>();
-            List<double> d10 = new List<double>();
+            /*Test is done with a file containing 100 000 observations with 6 variables. */
+            Directory.SetCurrentDirectory(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\"));
 
-            Random rand = new Random();
-            for (int i = 0; i < 10000; i++)
-            {
-                d1.Add(rand.Next(0, 100));
-                d2.Add(rand.Next(0, 100));
-                d3.Add(rand.Next(0, 100));
-                d4.Add(rand.Next(0, 100));
-                d5.Add(rand.Next(0, 100));
-                d6.Add(rand.Next(0, 100));
-                d7.Add(rand.Next(0, 100));
-                d8.Add(rand.Next(0, 100));
-                d9.Add(rand.Next(0, 100));
-                d10.Add(rand.Next(0, 100));
-            }
+            Model m = CSV.ToModel(@"test_files\performance_test.csv", "ord.num");
+            Fitness fitness = new AdjustedR2();
 
-            Variable yList = new Variable("list", d1);
-            Variable list2 = new Variable("list2", d2);
-            Variable list3 = new Variable("list3", d3);
-            Variable list4 = new Variable("list4", d4);
-            Variable list5 = new Variable("list5", d5);
-            Variable list6 = new Variable("list6", d6);
-            Variable list7 = new Variable("list7", d7);
-            Variable list8 = new Variable("list8", d8);
-            Variable list9 = new Variable("list9", d9);
-            Variable list10 = new Variable("list10", d10);
-            List<Variable> x = new List<Variable>() { list2, list3, list4, list5, list6, list7, list8, list9, list10 };
-
-            Fitness adjR2 = new AdjustedR2();
-            Model m = new Model(yList, x);
-            Selection sel = new Selection(m, adjR2);
-
+            Selection sel = new Selection(m, fitness);
             Stopwatch sw = new Stopwatch();
             sw.Start();
             sel.SelectBestFit();
@@ -137,7 +104,6 @@ namespace RegressionAnalysisTest
             Console.WriteLine("took + " + sw.ElapsedMilliseconds + " milliseconds");
             Assert.LessOrEqual(sw.ElapsedMilliseconds, 10000);
         }
-
 
     }
 }

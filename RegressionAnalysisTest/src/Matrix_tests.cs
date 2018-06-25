@@ -82,6 +82,20 @@ namespace RegressionAnalysisTest
         }
 
         [Test]
+        public void testInvertVariableListThrows_ArgumentExcpetion()
+        {
+            /*Different size lists should throw ArgumentExceptionError.*/
+
+            List<double> list1 = new List<double>() { 1, 2 };
+            List<double> list2 = new List<double>() { 1, 2 };
+            List<double> list3 = new List<double>() { 1, 2, 3 };
+
+            List<List<double>> lists = new List<List<double>>() { list1, list2, list3 };
+
+            Assert.Throws<ArgumentException>(() => Matrix.InvertVariableList(lists));
+        }
+
+        [Test]
         public void test_InvertVariableList1List()
         {
             List<double> list1 = new List<double>() { 1, 2, 4, 3 };
@@ -105,20 +119,6 @@ namespace RegressionAnalysisTest
             jArray[3] = new double[3] { 3, 5, 2.2 };
 
             Assert.AreEqual(jArray, Matrix.InvertVariableList(lists));
-        }
-
-        [Test]
-        public void testInvertVariableListThrows_ArgumentExcpetion()
-        {
-            /*Different size lists should throw ArgumentExceptionError.*/
-
-            List<double> list1 = new List<double>() { 1, 2 };
-            List<double> list2 = new List<double>() { 1, 2 };
-            List<double> list3 = new List<double>() { 1, 2, 3 };
-
-            List<List<double>> lists = new List<List<double>>() { list1, list2, list3 };
-
-            Assert.Throws<ArgumentException>(() => Matrix.InvertVariableList(lists));
         }
 
     }

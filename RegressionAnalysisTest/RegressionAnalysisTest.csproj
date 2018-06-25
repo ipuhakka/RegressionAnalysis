@@ -86,6 +86,8 @@
     <Content Include="test_files\test_csv_runs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="test_files\performance_test.csv" />
+    <Content Include="test_files\isoTesti.csv" />
     <None Include="test_files\test_verification.R" />
   </ItemGroup>
   <ItemGroup>
