@@ -31,6 +31,28 @@ namespace RegressionAnalysis
         }
 
         /// <summary>
+        /// Calculates Akaiken information criteria with formula 2k + n Log(RSS/n). 
+        /// k = number of variables in the model,
+        /// n = number of observations.
+        /// </summary>
+        /// <param name="y">List of response values.</param>
+        /// <param name="x">List of columns.</param>
+        /// <exception cref="ArgumentException">Thrown when parameter lists are of different
+        /// length.</exception>
+        public static double AIC(List<double> y, List<List<double>> x)
+        {
+            foreach (List<double> list in x)
+            {
+                if (list.Count != y.Count)
+                    throw new ArgumentException("Different length lists");
+            }
+
+            double result = 0;
+            result = 2 * (x.Count + 2) + y.Count * Math.Log(Residual.SumOfSquaredResiduals(y, x) / y.Count);
+            return result;
+        }
+
+        /// <summary>
         /// Calculates fitted values for response value y based on model containing variables listed in
         /// x.
         /// </summary>

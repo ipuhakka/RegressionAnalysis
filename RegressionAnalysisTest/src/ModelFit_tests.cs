@@ -157,5 +157,17 @@ namespace RegressionAnalysisTest
             Assert.LessOrEqual(sw.ElapsedMilliseconds, 1500);
         }
 
+        [Test]
+        public void test_AIC()
+        {
+            /*Result calculated with R.*/
+            List<double> y = new List<double>() { 1, 2.2, 3.1, 2.5 };
+            List<double> x1 = new List<double>() { 177, 175, 183, 167 };
+            List<double> x2 = new List<double>() { 3, 5, 6, 9 };
+            List<List<double>> x = new List<List<double>>() { x1, x2 };
+
+            Assert.AreEqual(-4.032542, Math.Round(ModelFit.AIC(y, x), 6));
+        }
+
     }
 }

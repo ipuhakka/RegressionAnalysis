@@ -67,6 +67,7 @@
     <Compile Include="src\ModelSelection_tests\Selection_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Variable_tests.cs" />
     <Compile Include="src\Regression_tests.cs" />
+    <Compile Include="src\Residual_tests.cs" />
     <Compile Include="src\Variance_tests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +88,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="test_files\performance_test.csv" />
-    <Content Include="test_files\isoTesti.csv" />
     <None Include="test_files\test_verification.R" />
   </ItemGroup>
   <ItemGroup>

@@ -88,8 +88,9 @@ namespace RegressionAnalysis
             Matrix<double> X = Matrix.Convert(x);
             Vector<double> yVector = Vector<double>.Build.DenseOfArray(y.ToArray());
             Vector<double> betaVector = (X.Transpose() * X).Inverse() * (X.Transpose() * yVector);
-            double[] betaArray = betaVector.ToArray();
+            x.RemoveAt(0);
 
+            double[] betaArray = betaVector.ToArray();
             return betaArray.ToList();
         }
     }

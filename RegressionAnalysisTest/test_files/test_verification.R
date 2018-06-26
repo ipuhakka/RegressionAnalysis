@@ -62,3 +62,16 @@ adj4
 adj5
 adj6
 adj7
+
+#ModelFit_tests.cs: AIC criteria testing. Formula used is 2k + n log(RSS/n)
+y <- c(1, 2.2, 3.1, 2.5)
+x1 <- c(177, 175, 183, 167)
+x2 <- c(3, 5, 6, 9)
+malli <- lm(y~x1+x2)
+n <- 4
+k <- 2 + 2 #b0, b1, b2 and variance 
+
+rss <- anova(malli)["Residuals", "Sum Sq"]
+result <- 2 * k + n * log(rss / n)
+print(result)
+
