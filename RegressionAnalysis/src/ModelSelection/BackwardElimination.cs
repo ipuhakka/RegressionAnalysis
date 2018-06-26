@@ -32,7 +32,7 @@ namespace RegressionAnalysis.ModelSelection
 
             int n = fullModel.getXVars().Count;
 
-            while (n > 0)
+            while (n > 1)
             {
                 Model prunedModel = bestSubModel(bestModel, criteria);
 

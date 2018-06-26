@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RegressionAnalysis.ModelSelection;
 
 namespace Linear_Console
@@ -41,7 +42,16 @@ namespace Linear_Console
                 Console.Write(v.name + " ");
             }
 
-            Console.Write("fitness: " + model.fitness + "\n");
+            Console.WriteLine("fitness: " + model.fitness);
+
+            List<double> coef = model.getCoefficients();
+
+            Console.Write("β0: " + coef[0] + " ");
+            for (int i = 1; i < coef.Count; i++)
+            {
+                Console.Write(String.Format("β{0}: {1}", i, coef[i]));
+            }
+            Console.WriteLine();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Linear_Console
 
             while (!input.Equals("q"))
             {
-                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3.Change fitness criteria\n4. Model analysis\n\nType 'q' for quitting");
+                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3. Change fitness criteria\n4. Model analysis\n\nType 'q' for quitting");
                 input = Console.ReadLine();
                 handleInput(input);
             }
@@ -63,7 +63,7 @@ namespace Linear_Console
 
         private static void setFitness()
         {
-            Console.WriteLine("1. Adjusted R2\n2. Akaike information criteria");
+            Console.WriteLine("1. Adjusted R2 (Default)\n2. Akaike information criteria");
 
             string input = Console.ReadLine();
 

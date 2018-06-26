@@ -13,6 +13,7 @@ namespace RegressionAnalysis.ModelSelection
         [JsonProperty]
         private List<Variable> xVars;
 
+
         /// <summary>
         /// Constructor for creating a Model-object. 
         /// </summary>
@@ -36,6 +37,14 @@ namespace RegressionAnalysis.ModelSelection
         public Model Clone()
         {
             return new Model(this.yVar, this.xVars);
+        }
+
+        /// <summary>
+        /// Returns OLS-coefficients for the fitted model.
+        /// </summary>
+        public List<double> getCoefficients()
+        {
+            return Regression.BetaEstimates(yVar.values, getXVariableLists());
         }
 
         public List<Variable> getXVars() { return xVars; }
