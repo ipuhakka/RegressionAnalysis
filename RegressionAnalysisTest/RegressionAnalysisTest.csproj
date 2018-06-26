@@ -64,7 +64,7 @@
     <Compile Include="src\ModelFit_tests.cs" />
     <Compile Include="src\ModelSelection_tests\BackwardElimination_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Model_tests.cs" />
-    <Compile Include="src\ModelSelection_tests\Selection_tests.cs" />
+    <Compile Include="src\ModelSelection_tests\FullSelection_tests.cs" />
     <Compile Include="src\ModelSelection_tests\Variable_tests.cs" />
     <Compile Include="src\Regression_tests.cs" />
     <Compile Include="src\Residual_tests.cs" />

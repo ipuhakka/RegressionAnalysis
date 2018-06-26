@@ -13,7 +13,7 @@ namespace RegressionAnalysis.ModelSelection
     /// subgroups maximum fitness is found in its own thread. This provides a somewhat better performance
     /// with large data sets with more than 6 explanatory variables.
     /// </summary>
-    public class Selection
+    public class FullSelection
     {
         private const int MODELS_PER_THREAD = 32;
         private List<Model> models;
@@ -28,7 +28,7 @@ namespace RegressionAnalysis.ModelSelection
         /// <param name="y">Response variable.</param>
         /// <param name="fitness_param">Implementation of Fitness interface.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Selection(Model model, Fitness fitness_param)
+        public FullSelection(Model model, Fitness fitness_param)
         {
             if (model == null || fitness_param == null)
                 throw new ArgumentNullException("Constructor doesn't accept null parameters.");

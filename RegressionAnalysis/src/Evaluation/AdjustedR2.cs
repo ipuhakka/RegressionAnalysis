@@ -31,8 +31,8 @@ namespace RegressionAnalysis.Evaluation
         {
             if (newModel.fitness > currentBest.fitness)
                 return true;
-            else
-                return false;
+            
+            return false;
         }
 
     }

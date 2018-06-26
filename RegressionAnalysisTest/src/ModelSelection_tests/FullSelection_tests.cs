@@ -11,7 +11,7 @@ using RegressionAnalysis.Converter;
 namespace RegressionAnalysisTest
 {   
     [TestFixture]
-    class Selection_tests
+    class FullSelection_tests
     {
         [Test]
         public void test_constructor_fitness_R2Adjusted()
@@ -21,7 +21,7 @@ namespace RegressionAnalysisTest
             Fitness adjR2 = new AdjustedR2();
             Variable y = new Variable("", new List<double>());
             Model m = new Model(y, new List<Variable>());
-            Selection sel = new Selection(m, adjR2);
+            FullSelection sel = new FullSelection(m, adjR2);
             Assert.True(sel.fitness.GetType() == typeof(AdjustedR2));
         }
 
@@ -39,7 +39,7 @@ namespace RegressionAnalysisTest
 
             Fitness adjR2 = new AdjustedR2();
             Model m = new Model(yList, xList);
-            Selection sel = new Selection(m, adjR2);
+            FullSelection sel = new FullSelection(m, adjR2);
 
             Model bestFit = sel.SelectBestFit();
 
@@ -82,7 +82,7 @@ namespace RegressionAnalysisTest
 
             Fitness adjR2 = new AdjustedR2();
             Model m = new Model(yList, x);
-            Selection sel = new Selection(m, adjR2);
+            FullSelection sel = new FullSelection(m, adjR2);
 
             Assert.Throws<MathError>(() => sel.SelectBestFit());
         }
@@ -95,8 +95,7 @@ namespace RegressionAnalysisTest
 
             Model m = CSV.ToModel(@"test_files\performance_test.csv", "ord.num");
             Fitness fitness = new AdjustedR2();
-
-            Selection sel = new Selection(m, fitness);
+            FullSelection sel = new FullSelection(m, fitness);
             Stopwatch sw = new Stopwatch();
             sw.Start();
             sel.SelectBestFit();

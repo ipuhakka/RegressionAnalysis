@@ -23,7 +23,7 @@ namespace Linear_Console
 
             while (!input.Equals("q"))
             {
-                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3. Model analysis\n\nType 'q' for quitting");
+                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3.Change fitness criteria\n4. Model analysis\n\nType 'q' for quitting");
                 input = Console.ReadLine();
                 handleInput(input);
             }
@@ -45,6 +45,9 @@ namespace Linear_Console
                     setResponse();
                     break;
                 case "3":
+                    setFitness();
+                    break;
+                case "4":
                     selectAnalysisMethod();
                     break;
                 case "q":
@@ -56,6 +59,28 @@ namespace Linear_Console
             }
 
             return;
+        }
+
+        private static void setFitness()
+        {
+            Console.WriteLine("1. Adjusted R2\n2. Akaike information criteria");
+
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    fitness = new AdjustedR2();
+                    Write.Success("Set adjusted R2 as fitness criteria");
+                    break;
+                case "2":
+                    fitness = new AIC();
+                    Write.Success("Set AIC as fitness criteria");
+                    break;
+                default:
+                    Write.Error("Unexpected input");
+                    break;
+            }
         }
 
         /// <summary>
@@ -93,7 +118,7 @@ namespace Linear_Console
 
         private static void selectAnalysisMethod()
         {
-            Console.WriteLine("1. Backward elimination\n2. Select best adjusted R2");
+            Console.WriteLine("1. Backward elimination\n2. Full model analysis");
             string result = Console.ReadLine();
 
             switch (result)
@@ -126,7 +151,7 @@ namespace Linear_Console
             }
 
             model = CSV.ToModel(filepath, responseVariable);
-            Selection sel = new Selection(model, fitness);
+            FullSelection sel = new FullSelection(model, fitness);
             results = sel.SelectBestFit();
             Write.Model(results);
         }

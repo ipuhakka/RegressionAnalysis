@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Converter\CSV.cs" />
+    <Compile Include="src\Evaluation\AIC.cs" />
     <Compile Include="src\Exception\InvalidCSVError.cs" />
     <Compile Include="src\Evaluation\AdjustedR2.cs" />
     <Compile Include="src\Evaluation\Fitness.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="src\ModelFit.cs" />
     <Compile Include="src\ModelSelection\BackwardElimination.cs" />
     <Compile Include="src\ModelSelection\Model.cs" />
-    <Compile Include="src\ModelSelection\Selection.cs" />
+    <Compile Include="src\ModelSelection\FullSelection.cs" />
     <Compile Include="src\ModelSelection\Variable.cs" />
     <Compile Include="src\Regression.cs" />
     <Compile Include="src\Residual.cs" />
