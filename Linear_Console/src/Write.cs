@@ -49,7 +49,7 @@ namespace Linear_Console
             Console.Write("β0: " + coef[0] + " ");
             for (int i = 1; i < coef.Count; i++)
             {
-                Console.Write(String.Format("β{0}: {1}", i, coef[i]));
+                Console.Write(String.Format("β{0}: {1} ", i, coef[i]));
             }
             Console.WriteLine();
         }
