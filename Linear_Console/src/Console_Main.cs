@@ -13,7 +13,7 @@ namespace Linear_Console
         public static List<string> variables { get; set; }
         public static string filepath { get; set; }
         private static Fitness fitness = new AdjustedR2();
-
+        
         /// <summary>
         /// Main loop for the console application. Takes user inputs in a loop and handles it accordingly. 
         /// </summary>
@@ -23,70 +23,80 @@ namespace Linear_Console
 
             while (!input.Equals("q"))
             {
-                Console.WriteLine("1. Read a file in\n2. Assign response variable\n3. Change fitness criteria\n4. Model analysis\n\nType 'q' for quitting");
+                Console.Write("Ready\n>");
                 input = Console.ReadLine();
-                handleInput(input);
+                parseInput(input);
             }
         }
 
         /// <summary>
-        /// starts a function based on user given input.
+        /// Reads what the user inputted, and completes appropriate action based on it.
+        /// Commands are separated from parameters with "->", and parameters are separated from
+        /// each other with ','.
         /// </summary>
-        /// <param name="input">user given input.</param>
-        /// <returns>-1 on error, 0 on success.</returns>
-        private static void handleInput(string input)
+        /// <param name="input"></param>
+        private static void parseInput(string input)
         {
-            switch (input)
+            string[] array = input.Split(new string[] { "->" }, StringSplitOptions.None);
+
+            switch (array[0].ToLower().Trim())
             {
-                case "1":
-                    ReadFile.Read();
+                case "read":
+                    ReadFile.Read(array[1].Trim());
                     break;
-                case "2":
-                    setResponse();
+                case "set fitness":
+                    setFitness(array[1].Trim());
                     break;
-                case "3":
-                    setFitness();
+                case "set response":
+                    setResponse(array[1].Trim());
                     break;
-                case "4":
+                case "print variables":
+                    printVariables();
+                    break;
+                case "analyze":
                     selectAnalysisMethod();
                     break;
                 case "q":
                     return;
-
                 default:
-                    Write.Error("Unexpected input");
-                    return;
+                    Write.Error("Command not recognized");
+                    break;
             }
-
-            return;
         }
 
-        private static void setFitness()
+        private static void setFitness(string input)
         {
-            Console.WriteLine("1. Adjusted R2 (Default)\n2. Akaike information criteria");
-
-            string input = Console.ReadLine();
-
             switch (input)
             {
-                case "1":
+                case "AdjR2":
                     fitness = new AdjustedR2();
                     Write.Success("Set adjusted R2 as fitness criteria");
                     break;
-                case "2":
+                case "AIC":
                     fitness = new AIC();
                     Write.Success("Set AIC as fitness criteria");
                     break;
                 default:
                     Write.Error("Unexpected input");
+                    Write.Error("Possible paramameters: AIC, AdjR2");
                     break;
             }
+        }
+
+        private static void printVariables()
+        {
+            Console.Write("Varibles: ");
+            foreach (string s in variables)
+            {
+                Console.Write(s + " ");
+            }
+            Console.Write("\n");
         }
 
         /// <summary>
         /// Prints variable names, sets response variable based on user input.
         /// </summary>
-        private static void setResponse()
+        private static void setResponse(string resp)
         {
             if (filepath == null)
             {
@@ -94,15 +104,6 @@ namespace Linear_Console
                 variables = null;
                 return;
             }
-
-            Console.Write("Varibles: ");
-            foreach(string s in variables)
-            {
-                Console.Write(s + " ");
-            }
-            Console.Write("\n");
-            Console.Write("Write variable name to choose variable as response: ");
-            string resp = Console.ReadLine();
 
             if (variables.Contains(resp))
             {

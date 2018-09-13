@@ -9,11 +9,9 @@ namespace Linear_Console
         /// <summary>
         /// Reads a csv-file, and sets variables based on the first row of the file.
         /// </summary>
-        public static void Read()
-        {
-            Console.Write("Input path to file: ");
-            string filepath = Console.ReadLine();
-            
+        public static void Read(string filepath)
+        {           
+            Console.WriteLine(filepath);
             if (Path.GetExtension(filepath) != ".csv")
             {
                 Write.Error("File needs to be in csv-format");
